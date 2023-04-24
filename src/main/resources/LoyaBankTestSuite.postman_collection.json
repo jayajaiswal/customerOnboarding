@@ -24,12 +24,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/loyalbank/overview?accountNumber=1001",
+					"raw": "http://localhost:8082/loyalbank/overview?accountNumber=1002",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"loyalbank",
 						"overview"
@@ -37,7 +37,7 @@
 					"query": [
 						{
 							"key": "accountNumber",
-							"value": "1001"
+							"value": "1002"
 						}
 					]
 				}
@@ -51,7 +51,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\":\"john.doe@gmail.com\",\n    \"password\": \"jhphgbtmi42\"\n}",
+					"raw": "{\n    \"username\":\"john.doe@gmail.com\",\n    \"password\": \"hpbsyvnno72\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -59,12 +59,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/loyalbank/login",
+					"raw": "http://localhost:8082/loyalbank/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"loyalbank",
 						"login"
@@ -80,7 +80,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"John Doe1\",\n    \"email\": \"john.doe1@gmail.com\",\n    \"dateOfBirth\": \"1994-02-10T06:11:00.000Z\",\n    \"country\": \"India\",\n    \"password\":null\n}",
+					"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-02-10T06:11:00.000Z\",\n    \"country\": \"India\",\n    \"password\":null\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,12 +88,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/loyalbank/registerCustomer",
+					"raw": "http://localhost:8082/loyalbank/registerCustomer",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"loyalbank",
 						"registerCustomer"
@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\":\"john.doe@gmail.com\",\n    \"password\": \"jhphgbtmi2\"\n}",
+					"raw": "{\n    \"username\":\"john.doe1@gmail.com\",\n    \"password\": \"xszfzxudm17ibenvgiyn9ljkksscmg93\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,12 +117,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/loyalbank/login",
+					"raw": "http://localhost:8082/loyalbank/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"loyalbank",
 						"login"
@@ -138,7 +138,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@gmail.com\",\n    \"dateOfBirth\": \"1994-02-10T06:11:00.000Z\",\n    \"country\": \"Netherlands\",\n    \"password\":null\n}",
+					"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe1@gmail.com\",\n    \"dateOfBirth\": \"1994-02-10T06:11:00.000Z\",\n    \"country\": \"Belgium\",\n    \"password\":null\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,12 +146,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/loyalbank/registerCustomer",
+					"raw": "http://localhost:8082/loyalbank/registerCustomer",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"loyalbank",
 						"registerCustomer"
@@ -175,12 +175,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/loyalbank/registerCustomer",
+					"raw": "http://localhost:8082/loyalbank/registerCustomer",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8082",
 					"path": [
 						"loyalbank",
 						"registerCustomer"

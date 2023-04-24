@@ -1,5 +1,6 @@
 package com.nl.customerOnboarding.model;
 
+import com.nl.customerOnboarding.domainObject.Account;
 import lombok.*;
 
 import java.sql.Date;
@@ -13,5 +14,6 @@ public class CustomerDetails {
     private String email;
     private Date dateOfBirth;
     private String country;
-    private AccountDetails account;
+    private Account account;
+    private String password;
 }

@@ -1,5 +1,7 @@
 package com.nl.customerOnboarding.service;
 
+import com.nl.customerOnboarding.domainObject.Account;
+import com.nl.customerOnboarding.domainObject.Customer;
 import com.nl.customerOnboarding.exception.CustomerNotAddedException;
 import com.nl.customerOnboarding.model.AccountDetails;
 import com.nl.customerOnboarding.model.CustomerDetails;
@@ -26,13 +28,24 @@ public class CustomerOnboardingServiceTest {
     public void registerNewCustomer_successful_test() {
         Map<String, String> credentials = new HashMap<>();
         Date date = new Date(1994, 2, 10);
-        CustomerDetails customer = new CustomerDetails(
+        Customer customer = new Customer(
                 "John Doe",
                 "john.doe@gmail.com",
                 date, "USA",
                 null);
-        credentials.put("john.doe@gmail.com", password);
-        when(customerOnboardingService.registerCustomer(customer)).thenReturn(credentials);
+        CustomerDetails customerDetails = new CustomerDetails(
+                customer.getName(),
+                customer.getEmail(),
+                customer.getDateOfBirth(),
+                customer.getCountry(),
+                new Account(
+                        1002,
+                        "Savings", 1000,
+                        "$",
+                        new Date(2000, 01, 7)),
+                password
+                );
+        when(customerOnboardingService.registerCustomer(customer)).thenReturn(customerDetails);
 
     }
 
@@ -40,12 +53,11 @@ public class CustomerOnboardingServiceTest {
     public void registerNewCustomer_Unsuccessful_countryNa_test() {
         Map<String, String> credentials = new HashMap<>();
         Date date = new Date(1994, 2, 10);
-        CustomerDetails customer = new CustomerDetails(
+        Customer customer = new Customer(
                 "John Doe",
                 "john.doe@gmail.com",
                 date, "Belgium",
                 null);
-        credentials.put("john.doe@gmail.com", password);
         when(customerOnboardingService.registerCustomer(customer)).thenThrow(CustomerNotAddedException.class);
 
     }
@@ -54,12 +66,11 @@ public class CustomerOnboardingServiceTest {
     public void registerNewCustomer_Unsuccessful_age_test() {
         Map<String, String> credentials = new HashMap<>();
         Date date = new Date(2022, 2, 10);
-        CustomerDetails customer = new CustomerDetails(
+        Customer customer = new Customer(
                 "John Doe",
                 "john.doe@gmail.com",
                 date, "India",
                 null);
-        credentials.put("john.doe@gmail.com", password);
         when(customerOnboardingService.registerCustomer(customer)).thenThrow(CustomerNotAddedException.class);
 
     }

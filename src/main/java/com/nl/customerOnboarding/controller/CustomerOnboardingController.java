@@ -1,5 +1,6 @@
 package com.nl.customerOnboarding.controller;
 
+import com.nl.customerOnboarding.domainObject.Customer;
 import com.nl.customerOnboarding.exception.AccountNotFoundException;
 import com.nl.customerOnboarding.exception.CustomerNotAddedException;
 import com.nl.customerOnboarding.model.CustomerDetails;
@@ -22,11 +23,11 @@ public class CustomerOnboardingController {
     CustomerOnboardingService customerOnboardingService;
 
     @PostMapping(value = "/registerCustomer")
-    public ResponseEntity registerCustomer(@RequestBody CustomerDetails customer) {
+    public ResponseEntity registerCustomer(@RequestBody Customer customer) {
 
         try {
-            Map<String, String> loginCredentials = customerOnboardingService.registerCustomer(customer);
-            return new ResponseEntity<>("Customer created: " + loginCredentials, HttpStatus.OK);
+            CustomerDetails customerDetails = customerOnboardingService.registerCustomer(customer);
+            return new ResponseEntity<>(customerDetails, HttpStatus.OK);
         } catch (CustomerNotAddedException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

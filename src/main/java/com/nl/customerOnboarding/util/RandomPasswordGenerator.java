@@ -8,6 +8,7 @@ public class RandomPasswordGenerator {
 
     public static String generatePassword() {
         Random rand = new Random();
+        password = "";
         for (int i = 1; i < 10; i++) {
             password += (char) (rand.nextInt(1, 26) + 'a');
         }

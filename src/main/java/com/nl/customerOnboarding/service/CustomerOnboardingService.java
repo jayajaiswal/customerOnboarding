@@ -28,7 +28,7 @@ public class CustomerOnboardingService {
     @Autowired
     AccountRepository accountRepo;
 
-    public Map<String, String> registerCustomer(CustomerDetails customer) {
+    public CustomerDetails registerCustomer(Customer customer) {
 
         try {
             if (customer.getCountry().equals("Netherlands") || customer.getCountry().equals("Belgium") || customer.getCountry().equals("Germany")) {
@@ -47,11 +47,18 @@ public class CustomerOnboardingService {
                             RandomPasswordGenerator.generatePassword()
                     ));
 
-            loginCredentials.put(newCustomer.getEmail(), newCustomer.getPassword());
+            //loginCredentials.put(newCustomer.getEmail(), newCustomer.getPassword());
             Account newAccount = new Account(1002, "Savings", 1000, "$", new Date(2000, 01, 7));
             accountRepo.save(newAccount);
+            CustomerDetails customerDetails = new CustomerDetails(
+                    newCustomer.getName(),
+                    newCustomer.getEmail(),
+                    newCustomer.getDateOfBirth(),
+                    newCustomer.getCountry(),
+                    newAccount,
+                    newCustomer.getPassword());
 
-            return loginCredentials;
+            return customerDetails;
         } catch (Exception e) {
             throw new CustomerNotAddedException(e.getMessage());
         }
@@ -60,13 +67,18 @@ public class CustomerOnboardingService {
 
     public Boolean loginCustomer(User user) {
 
-        Customer customer = repo.findByEmail(user.getUsername());
-        if (customer != null) {
-            if (customer.getPassword().equals(user.getPassword())) {
-                return true;
+        try {
+            Customer customer = repo.findByEmail(user.getUsername());
+            if (customer != null) {
+                if (customer.getPassword().equals(user.getPassword())) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
+        catch(Exception e){
+            throw new AccountNotFoundException(e.getMessage());
+        }
     }
 
     public AccountDetails getOverview(long accountNumber) {

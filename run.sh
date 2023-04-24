@@ -7,4 +7,4 @@ docker run --network customer-onboarding-network --name customer-onboarding-app 
 
 cd src
 docker cp main/resources/schema.sql mysqldb:/
-docker exec mysqldb /bin/sh -c 'mysql -u root -proot </dbScript.sql'
+docker exec mysqldb /bin/sh -c 'mysql -u root -proot </schema.sql'
