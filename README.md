@@ -37,8 +37,9 @@ An account overview is also available with an information like account type, bal
 3. http://localhost:8082/overview<br>
    This endpoint gives an account overview of the customer.
 
-## To run unit tests<br>
+## To run tests<br>
 
 1. Create a MySql schema with username and password as 'root'.
 2. Change _spring.profiles.active_ from _docker_ to _local_
-3. Right click on project and click on Run 'All Tests'.
+3. Right click on project and click on Run 'All Tests' to run unit tests.
+4. There is also a postman collection of tests in src/main/resources which can be imported and run on your postman.
