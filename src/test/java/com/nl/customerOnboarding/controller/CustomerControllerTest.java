@@ -6,8 +6,7 @@ import com.nl.customerOnboarding.exception.CustomerNotAddedException;
 import com.nl.customerOnboarding.model.AccountDetails;
 import com.nl.customerOnboarding.model.CustomerDetails;
 import com.nl.customerOnboarding.model.User;
-import com.nl.customerOnboarding.repository.CustomerOnboardingRepository;
-import com.nl.customerOnboarding.service.CustomerOnboardingService;
+import com.nl.customerOnboarding.service.CustomerService;
 import com.nl.customerOnboarding.util.RandomPasswordGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,26 +23,23 @@ import java.util.Map;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class CustomerOnboardingControllerTest {
+public class CustomerControllerTest {
 
     @Mock
-    CustomerOnboardingService service;
+    CustomerService service;
     @InjectMocks
-    CustomerOnboardingController controller;
-    @Mock
-    CustomerOnboardingRepository repo;
+    CustomerController controller;
 
     String password = RandomPasswordGenerator.generatePassword();
 
     @Test
     public void registerCustomerTest_successful() {
-
         Map<String, String> credentials = new HashMap<>();
         Date date = new Date(1994, 2, 10);
         Customer customer = new Customer(
                 "John Doe",
                 "john.doe@gmail.com",
-                date, "USA",
+                date.toLocalDate(), "India",
                 null);
         CustomerDetails customerDetails = new CustomerDetails(
                 customer.getName(),
@@ -65,40 +61,35 @@ public class CustomerOnboardingControllerTest {
 
     @Test
     public void registerCustomerTest_unsuccessful_countryNA() {
-
         Map<String, String> credentials = new HashMap<>();
         Date date = new Date(1994, 2, 10);
         Customer customer = new Customer(
                 "John Doe",
                 "john.doe@gmail.com",
-                date, "Belgium",
+                date.toLocalDate(), "Belgium",
                 null);
 
         when(service.registerCustomer(customer)).thenThrow(CustomerNotAddedException.class);
         ResponseEntity response = controller.registerCustomer(customer);
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-
     }
 
     @Test
     public void registerCustomerTest_unsuccessful_invalidAge() {
-
         Map<String, String> credentials = new HashMap<>();
         Date date = new Date(1994, 2, 10);
         Customer customer = new Customer(
                 "John Doe",
                 "john.doe@gmail.com",
-                date, "USA",
+                date.toLocalDate(), "USA",
                 null);
         when(service.registerCustomer(customer)).thenThrow(CustomerNotAddedException.class);
         ResponseEntity response = controller.registerCustomer(customer);
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-
     }
 
     @Test
     public void login_successful() {
-
         User user = new User("john.doe@gmail.com", password);
         when(service.loginCustomer(user)).thenReturn(true);
         ResponseEntity response = controller.initiateLogin(user);
@@ -107,7 +98,6 @@ public class CustomerOnboardingControllerTest {
 
     @Test
     public void login_unSuccessful() {
-
         User user = new User("john@gmail.com", "abc");
         when(service.loginCustomer(user)).thenReturn(false);
         ResponseEntity response = controller.initiateLogin(user);
@@ -116,7 +106,6 @@ public class CustomerOnboardingControllerTest {
 
     @Test
     public void getAccountOverviewTest() {
-
         long accountNumber = 1001;
         AccountDetails accountDetails = new AccountDetails(
                 1001,

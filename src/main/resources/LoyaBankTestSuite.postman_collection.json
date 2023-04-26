@@ -24,14 +24,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/loyalbank/overview?accountNumber=1002",
+					"raw": "http://localhost:8082/overview?accountNumber=1002",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"loyalbank",
 						"overview"
 					],
 					"query": [
@@ -51,7 +50,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\":\"john.doe@gmail.com\",\n    \"password\": \"hpbsyvnno72\"\n}",
+					"raw": "{\n    \"username\":\"john.doe@gmail.com\",\n    \"password\": \"xxiuwmsrl83\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -59,15 +58,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/loyalbank/login",
+					"raw": "http://localhost:8082/logon",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"loyalbank",
-						"login"
+						"logon"
 					]
 				}
 			},
@@ -88,15 +86,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/loyalbank/registerCustomer",
+					"raw": "http://localhost:8082/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"loyalbank",
-						"registerCustomer"
+						"register"
 					]
 				}
 			},
@@ -117,15 +114,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/loyalbank/login",
+					"raw": "http://localhost:8082/logon",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"loyalbank",
-						"login"
+						"logon"
 					]
 				}
 			},
@@ -146,15 +142,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/loyalbank/registerCustomer",
+					"raw": "http://localhost:8082/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"loyalbank",
-						"registerCustomer"
+						"register"
 					]
 				}
 			},
@@ -175,15 +170,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/loyalbank/registerCustomer",
+					"raw": "http://localhost:8082/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"loyalbank",
-						"registerCustomer"
+						"register"
 					]
 				}
 			},

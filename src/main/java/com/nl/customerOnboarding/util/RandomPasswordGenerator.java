@@ -12,7 +12,7 @@ public class RandomPasswordGenerator {
         for (int i = 1; i < 10; i++) {
             password += (char) (rand.nextInt(1, 26) + 'a');
         }
-        password += rand.nextInt(1, 99);
+        password += rand.nextInt(10, 99);
         return password;
     }
 }

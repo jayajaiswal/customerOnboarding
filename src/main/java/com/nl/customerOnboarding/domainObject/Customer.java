@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,7 +26,7 @@ public class Customer {
     private String email;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "country")
     private String country;
@@ -35,7 +34,7 @@ public class Customer {
     @Column(name = "password")
     private String password;
 
-    public Customer(String name, String email, Date dateOfBirth, String country, String password) {
+    public Customer(String name, String email, LocalDate dateOfBirth, String country, String password) {
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;

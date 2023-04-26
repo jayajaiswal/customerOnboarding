@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CustomerOnboardingService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nl.customerOnboarding.service</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomerOnboardingService (com.nl.customerOnboarding.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomerOnboardingService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93,1%
+  </span>
+  <span class="absValue">
+    (27/29)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CustomerOnboardingService$MockitoMock$QgrFMsGb</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerOnboardingService$MockitoMock$QgrFMsGb$auxiliary$JDUygmFB</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerOnboardingService$MockitoMock$QgrFMsGb$auxiliary$LN8U7bid</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerOnboardingService$MockitoMock$QgrFMsGb$auxiliary$m6dnHiRS</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerOnboardingService$MockitoMock$QgrFMsGb$auxiliary$rL8rp669</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerOnboardingService$MockitoMock$QgrFMsGb$auxiliary$S4KCvzsv</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93,1%
+  </span>
+  <span class="absValue">
+    (27/29)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.nl.customerOnboarding.service;
+&nbsp;
+&nbsp;import com.nl.customerOnboarding.domainObject.Account;
+&nbsp;import com.nl.customerOnboarding.domainObject.Customer;
+&nbsp;import com.nl.customerOnboarding.exception.AccountNotFoundException;
+&nbsp;import com.nl.customerOnboarding.exception.CustomerNotAddedException;
+&nbsp;import com.nl.customerOnboarding.model.AccountDetails;
+&nbsp;import com.nl.customerOnboarding.model.CustomerDetails;
+&nbsp;import com.nl.customerOnboarding.model.User;
+&nbsp;import com.nl.customerOnboarding.repository.AccountRepository;
+&nbsp;import com.nl.customerOnboarding.repository.CustomerRepository;
+&nbsp;import com.nl.customerOnboarding.util.RandomPasswordGenerator;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import java.sql.Date;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class CustomerOnboardingService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    CustomerOnboardingRepository repo;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    AccountRepository accountRepo;
+&nbsp;
+&nbsp;    public CustomerDetails registerCustomer(Customer customer) {
+&nbsp;        try {
+<b class="fc">&nbsp;            if (customer.getCountry().equals(&quot;Netherlands&quot;) || customer.getCountry().equals(&quot;Belgium&quot;) || customer.getCountry().equals(&quot;Germany&quot;)) {</b>
+<b class="fc">&nbsp;                throw new Exception(&quot;Members from &quot; + customer.getCountry() + &quot; not allowed to create an account&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if ((LocalDate.now().getYear() - customer.getDateOfBirth().getYear()) &lt;= 18) {</b>
+<b class="fc">&nbsp;                throw new Exception(&quot;Age should be greater than 18&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            customer.setPassword(RandomPasswordGenerator.generatePassword());</b>
+<b class="fc">&nbsp;            Customer newCustomer = (Customer) repo.save(customer);</b>
+<b class="fc">&nbsp;            Account newAccount = new Account(1002, &quot;Savings&quot;, 1000, &quot;$&quot;, new Date(2000, 01, 7));</b>
+<b class="fc">&nbsp;            accountRepo.save(newAccount);</b>
+<b class="fc">&nbsp;            CustomerDetails customerDetails = new CustomerDetails(</b>
+<b class="fc">&nbsp;                    newCustomer.getName(),</b>
+<b class="fc">&nbsp;                    newCustomer.getEmail(),</b>
+<b class="fc">&nbsp;                    newCustomer.getDateOfBirth(),</b>
+<b class="fc">&nbsp;                    newCustomer.getCountry(),</b>
+&nbsp;                    newAccount,
+<b class="fc">&nbsp;                    newCustomer.getPassword());</b>
+&nbsp;
+<b class="fc">&nbsp;            return customerDetails;</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            throw new CustomerNotAddedException(e.getMessage());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Boolean loginCustomer(User user) {
+&nbsp;        try {
+<b class="fc">&nbsp;            Customer customer = repo.findByEmail(user.getUsername());</b>
+<b class="fc">&nbsp;            if (customer != null) {</b>
+<b class="fc">&nbsp;                if (customer.getPassword().equals(user.getPassword())) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch(Exception e){</b>
+<b class="nc">&nbsp;            throw new AccountNotFoundException(e.getMessage());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public AccountDetails getOverview(long accountNumber) {
+&nbsp;        try {
+<b class="fc">&nbsp;            Account account = accountRepo.findByAccountNumber(accountNumber);</b>
+<b class="fc">&nbsp;            return AccountDetails.map(account);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            throw new AccountNotFoundException(e.getMessage());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-25 17:56</div>
+</div>
+</body>
+</html>

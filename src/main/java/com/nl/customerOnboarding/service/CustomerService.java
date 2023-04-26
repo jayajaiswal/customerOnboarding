@@ -8,46 +8,32 @@ import com.nl.customerOnboarding.model.AccountDetails;
 import com.nl.customerOnboarding.model.CustomerDetails;
 import com.nl.customerOnboarding.model.User;
 import com.nl.customerOnboarding.repository.AccountRepository;
-import com.nl.customerOnboarding.repository.CustomerOnboardingRepository;
+import com.nl.customerOnboarding.repository.CustomerRepository;
 import com.nl.customerOnboarding.util.RandomPasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
-public class CustomerOnboardingService {
+public class CustomerService {
 
     @Autowired
-    CustomerOnboardingRepository repo;
+    CustomerRepository repo;
 
     @Autowired
     AccountRepository accountRepo;
 
     public CustomerDetails registerCustomer(Customer customer) {
-
         try {
             if (customer.getCountry().equals("Netherlands") || customer.getCountry().equals("Belgium") || customer.getCountry().equals("Germany")) {
                 throw new Exception("Members from " + customer.getCountry() + " not allowed to create an account");
             }
-            if ((LocalDate.now().getYear() - customer.getDateOfBirth().toLocalDate().getYear()) <= 18) {
+            if ((LocalDate.now().getYear() - customer.getDateOfBirth().getYear()) <= 18) {
                 throw new Exception("Age should be greater than 18");
             }
-            Map<String, String> loginCredentials = new HashMap<>();
-            Customer newCustomer = (Customer) repo.save
-                    (new Customer(
-                            customer.getName(),
-                            customer.getEmail(),
-                            customer.getDateOfBirth(),
-                            customer.getCountry(),
-                            RandomPasswordGenerator.generatePassword()
-                    ));
-
-            //loginCredentials.put(newCustomer.getEmail(), newCustomer.getPassword());
+            customer.setPassword(RandomPasswordGenerator.generatePassword());
+            Customer newCustomer = (Customer) repo.save(customer);
             Account newAccount = new Account(1002, "Savings", 1000, "$", new Date(2000, 01, 7));
             accountRepo.save(newAccount);
             CustomerDetails customerDetails = new CustomerDetails(
@@ -66,7 +52,6 @@ public class CustomerOnboardingService {
     }
 
     public Boolean loginCustomer(User user) {
-
         try {
             Customer customer = repo.findByEmail(user.getUsername());
             if (customer != null) {
@@ -82,13 +67,11 @@ public class CustomerOnboardingService {
     }
 
     public AccountDetails getOverview(long accountNumber) {
-
         try {
             Account account = accountRepo.findByAccountNumber(accountNumber);
             return AccountDetails.map(account);
         } catch (Exception e) {
             throw new AccountNotFoundException(e.getMessage());
         }
-
     }
 }

@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CustomerOnboardingController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nl.customerOnboarding.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomerOnboardingController (com.nl.customerOnboarding.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomerOnboardingController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81,8%
+  </span>
+  <span class="absValue">
+    (9/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.nl.customerOnboarding.controller;
+&nbsp;
+&nbsp;import com.nl.customerOnboarding.domainObject.Customer;
+&nbsp;import com.nl.customerOnboarding.exception.AccountNotFoundException;
+&nbsp;import com.nl.customerOnboarding.exception.CustomerNotAddedException;
+&nbsp;import com.nl.customerOnboarding.model.CustomerDetails;
+&nbsp;import com.nl.customerOnboarding.model.User;
+&nbsp;import com.nl.customerOnboarding.service.CustomerService;
+&nbsp;import jakarta.websocket.server.PathParam;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(value = &quot;/loyalbank&quot;, produces = &quot;application/json&quot;)
+<b class="fc">&nbsp;public class CustomerOnboardingController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    CustomerOnboardingService customerOnboardingService;
+&nbsp;
+&nbsp;    @PostMapping(value = &quot;/registerCustomer&quot;)
+&nbsp;    public ResponseEntity registerCustomer(@RequestBody Customer customer) {
+&nbsp;        try {
+<b class="fc">&nbsp;            CustomerDetails customerDetails = customerOnboardingService.registerCustomer(customer);</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(customerDetails, HttpStatus.OK);</b>
+<b class="fc">&nbsp;        } catch (CustomerNotAddedException e) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(value = &quot;/login&quot;)
+&nbsp;    public ResponseEntity initiateLogin(@RequestBody User user) {
+<b class="fc">&nbsp;        if (customerOnboardingService.loginCustomer(user) == true) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity(&quot;User logged in&quot;, HttpStatus.OK);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return new ResponseEntity(&quot;Username or password incorrect&quot;, HttpStatus.BAD_REQUEST);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(value = &quot;/overview&quot;)
+&nbsp;    public ResponseEntity getAccountOverview(@PathParam(value = &quot;accountNumber&quot;) long accountNumber) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return new ResponseEntity(customerOnboardingService.getOverview(accountNumber), HttpStatus.OK);</b>
+<b class="nc">&nbsp;        } catch (AccountNotFoundException e) {</b>
+<b class="nc">&nbsp;            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-25 17:56</div>
+</div>
+</body>
+</html>

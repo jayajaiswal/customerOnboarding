@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Account</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nl.customerOnboarding.domainObject</a>
+</div>
+
+<h1>Coverage Summary for Class: Account (com.nl.customerOnboarding.domainObject)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Account</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Account$HibernateProxy$t12Mlr1r</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.nl.customerOnboarding.domainObject;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.sql.Date;
+&nbsp;
+&nbsp;@Getter
+<b class="nc">&nbsp;@Setter</b>
+<b class="fc">&nbsp;@NoArgsConstructor</b>
+<b class="nc">&nbsp;@ToString</b>
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Account&quot;)
+&nbsp;public class Account {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+<b class="nc">&nbsp;    private long id;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;account_no&quot;)
+<b class="fc">&nbsp;    private long accountNumber;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;account_type&quot;)
+<b class="fc">&nbsp;    private String accountType;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;balance&quot;)
+<b class="fc">&nbsp;    private double balance;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;currency&quot;)
+<b class="fc">&nbsp;    private String currency;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;account_opened_on&quot;)
+<b class="fc">&nbsp;    private Date accountOpenedOn;</b>
+&nbsp;
+<b class="fc">&nbsp;    public Account(long accountNumber, String accountType, double balance, String currency, Date accountOpenedOn) {</b>
+<b class="fc">&nbsp;        this.accountNumber = accountNumber;</b>
+<b class="fc">&nbsp;        this.accountType = accountType;</b>
+<b class="fc">&nbsp;        this.balance = balance;</b>
+<b class="fc">&nbsp;        this.currency = currency;</b>
+<b class="fc">&nbsp;        this.accountOpenedOn = accountOpenedOn;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-25 17:56</div>
+</div>
+</body>
+</html>
